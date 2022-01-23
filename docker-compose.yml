@@ -1,0 +1,13 @@
+version: '2.0'
+
+services:
+  nginx:
+    image: 'rwecho/nginx-autocert:latest'
+    container_name: 'nginx-autocert'
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./etc/nginx/conf.d:/etc/nginx/conf.d
+      - ./etc/letsencrypt:/etc/letsencrypt
+    restart: always
