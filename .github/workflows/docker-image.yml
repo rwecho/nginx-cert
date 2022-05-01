@@ -14,6 +14,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag cert-nginx:$(date +%s)
-    - run: docker build . --file Dockerfile --tag cert-nginx:latest
+
+
+    - name: Docker Build & Push 
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+        image: cert-nginx
+        dockerfile: Dockerfile
+        tags: $(date +%s)
+        registry: ghcr.io
+        username: ${{ secrets.GHCR_USERNAME }}
+        password: ${{ secrets.GHCR_TOKEN }}
+        addLatest: true
+        addTimestamp: true
