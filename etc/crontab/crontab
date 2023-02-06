@@ -14,6 +14,6 @@
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-* * * * * echo 'hello world' > /proc/1/fd/1 2>/proc/1/fd/2
-0 12 * * * certbot renew --quiet > /proc/1/fd/1 2>/proc/1/fd/2
-0 6 * * * nginx -t && nginx -s reload > /proc/1/fd/1 2>/proc/1/fd/2
+* * * * * echo 'hello world '+$(date) > /var/log/cron-hello.txt
+0 12 * * * certbot renew --quiet > /var/log/cron-renew.txt
+0 6 * * * nginx -t && nginx -s reload > /var/log/cron-nginx.txt
